@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "cookie-tables",
+    "version": "0.1.0",
+    "action": {
+        "default_title": "cookie-tables",
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true
+    }
+}
