@@ -1,24 +1,25 @@
 <script lang="ts">
-  import logo from '$assets/logo.svg'
-  import Counter from '$lib/Counter.svelte'
+  import logo from "$assets/logo.svg";
+  import TextInput from "$lib/controls/TextInput.svelte";
+  import Row from "$lib/flex/Row.svelte";
+
+  let val;
 </script>
 
+<div class="filter">
+  <Row>
+    <div flex-grow>
+      <TextInput bind:value={val} />
+      <TextInput bind:value={val} />
+    </div>
+    <img src={logo} alt="cookie-tables Logo" />
+  </Row>
+</div>
+
 <main>
-  <img src={logo} alt="cookie-tables Logo" />
-  <h4>cookie-tables</h4>
 
-  <Counter />
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps. 
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
 </main>
+
 
 <style>
   :root {
@@ -26,40 +27,21 @@
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
+  :global(html, body) {
+    margin: 0;
+    padding: 0;
   }
-
+  .filter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5rem;
+    padding: .5rem;
+    border-bottom: 2px solid #888;
+  }
   img {
-    height: 16rem;
-    width: 16rem;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
-  }
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
-    }
-
-    p {
-      max-width: none;
-    }
+    width: 5rem;
+    height: 5rem;
   }
 </style>

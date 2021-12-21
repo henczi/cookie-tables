@@ -1,7 +1,7 @@
 <script lang="ts">
   import logo from '$assets/logo.svg'
   import Counter from '$lib/Counter.svelte'
-  import Button from '$lib/Button.svelte';
+  import Button from '$lib/controls/Button.svelte';
 </script>
 
 <main>
