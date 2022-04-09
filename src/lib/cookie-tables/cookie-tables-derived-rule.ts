@@ -1,6 +1,15 @@
 import type { CookieChange } from "./types/cookie-change";
+import type { RequestDetails } from "./types/request-details";
 
-export abstract class CookieTablesDerivedRule {
+export interface ICookieTablesDerivedRule {
+  domain: string;
+  otherDomains: string[];
+
+  onCookieChange(changeInfo: CookieChange): void;
+  onBeforeRequest(requestDetails: RequestDetails): void; // TODO
+}
+
+export abstract class CookieTablesDerivedRule implements ICookieTablesDerivedRule {
   domain: string;
   otherDomains: string[];
 
@@ -10,5 +19,5 @@ export abstract class CookieTablesDerivedRule {
   }
 
   abstract onCookieChange(changeInfo: CookieChange): void;
-  abstract onBeforeRequest(changeInfo: CookieChange): void; // TODO
+  abstract onBeforeRequest(requestDetails: RequestDetails): void; // TODO
 }

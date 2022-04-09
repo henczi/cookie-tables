@@ -1,7 +1,9 @@
 import type { CookieTablesDerivedRule } from "./cookie-tables-derived-rule";
 import type { CookieTablesRule } from "./cookie-tables-rule";
 import { CopyRule as CopyFromToRule } from "./rules/copy";
+import { ResetRule } from "./rules/reset";
 import type { CookieChange } from "./types/cookie-change";
+import type { RequestDetails } from "./types/request-details";
 
 const DB_KEY = 'cookie-tables-key';
 
@@ -12,7 +14,11 @@ export class CookieTables {
 
   ___test() {
     this.rules.push(
-      new CopyFromToRule('CONSENT', ['.google.com', 'webtar.hu'])
+      new CopyFromToRule('CONSENT', ['.google.com', 'webtar.hu']),
+      new ResetRule({
+        'd_prefs': 'MjoxLGNvbnNlbnRfdmVyc2lvbjoyLHRleHRfdmVyc2lvbjoxMDAw',
+        'tst_TEST': 'tst_TEST',
+      }, ['twitter.com'])
     );
     this.derive();
   }
@@ -30,6 +36,11 @@ export class CookieTables {
   onCookieChange(changeInfo: CookieChange) {
     const domain = changeInfo.cookie.domain;
     this.domainMap.get(domain)?.forEach(x => x.onCookieChange(changeInfo));
+  }
+
+  onBeforeRequest(requestDetails: RequestDetails) {
+    const domain = new URL(requestDetails.url).hostname;
+    this.domainMap.get(domain)?.forEach(x => x.onBeforeRequest(requestDetails))
   }
 
   private derive() {

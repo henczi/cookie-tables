@@ -1,7 +1,16 @@
-import type { CookieTablesDerivedRule } from "./cookie-tables-derived-rule";
+import type { ICookieTablesDerivedRule } from "./cookie-tables-derived-rule";
 import type { CookieTablesRuleType } from "./cookie-tables-rule-type";
 
-export abstract class CookieTablesRule {
+export interface ICookieTablesRule {
+  type: CookieTablesRuleType;
+
+  cookieName: string; // TODO: remove ?!
+  domains: string[];
+
+  getDerivedRules(): ICookieTablesDerivedRule[]
+}
+
+export abstract class CookieTablesRule implements ICookieTablesRule {
   type: CookieTablesRuleType;
 
   cookieName: string;
@@ -12,5 +21,5 @@ export abstract class CookieTablesRule {
     this.domains = _domains
   }
 
-  abstract getDerivedRules(): CookieTablesDerivedRule[]
+  abstract getDerivedRules(): ICookieTablesDerivedRule[]
 }

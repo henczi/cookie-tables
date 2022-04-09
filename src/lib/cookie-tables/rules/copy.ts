@@ -3,6 +3,7 @@ import { CookieTablesRule } from "../cookie-tables-rule";
 import { CookieTablesRuleType } from "../cookie-tables-rule-type";
 import { domainToUrl } from "../helpers";
 import type { CookieChange } from "../types/cookie-change";
+import type { RequestDetails } from "../types/request-details";
 
 class CopyRuleDerivedFrom extends CookieTablesDerivedRule {
 
@@ -31,18 +32,20 @@ class CopyRuleDerivedFrom extends CookieTablesDerivedRule {
       });
     }
   }
-  onBeforeRequest(changeInfo: CookieChange): void {
-
+  onBeforeRequest(requestDetails: RequestDetails): void {
+    console.log('CopyRuleDerivedFrom::onBeforeRequest', requestDetails)
   }
 
 }
 
 class CopyRuleDerivedTo extends CookieTablesDerivedRule {
+
   onCookieChange(changeInfo: CookieChange): void {
     console.log('CopyRuleDerivedTo::onCookieChange', changeInfo)
   }
-  onBeforeRequest(changeInfo: CookieChange): void {
 
+  onBeforeRequest(requestDetails: RequestDetails): void {
+    console.log('CopyRuleDerivedTo::onBeforeRequest', requestDetails)
   }
 
 }
